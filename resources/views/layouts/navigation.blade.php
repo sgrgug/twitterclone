@@ -3,34 +3,34 @@
     <div class="pl-28">
  
         <div class="py-1">
-            <a class="inline-block hover:bg-tri-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
                 <img class="h-10" src="{{ asset('assets/images/logo-twitter.png') }}" alt="">
             </a>
         </div>
         
         <div class="py-1">
-            <a class="inline-block hover:bg-tri-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
                 <ion-icon class="pr-3" name="home-outline"></ion-icon>
                 Home
             </a>
         </div>
 
         <div class="py-1">
-            <a class="inline-block hover:bg-tri-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
                 <ion-icon class="pr-3" name="search-outline"></ion-icon>
                 Explore
             </a>
         </div>
 
         <div class="py-1">
-            <a class="inline-block hover:bg-tri-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
                 <ion-icon class="pr-3" name="checkmark-circle-outline"></ion-icon>
                 Verified
             </a>
         </div>
 
         <div class="py-1">
-            <a class="inline-block hover:bg-tri-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
                 <ion-icon class="pr-3" name="person-outline"></ion-icon>
                 Profile
             </a>
@@ -42,10 +42,10 @@
             </a>
         </div>
 
-        <div class="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-tri-100 rounded-full">
+        <div class="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-qaud-100 rounded-full">
             <div class="flex justify-center items-center">
                 <div class="bg-slate-300 rounded-full">
-                    <ion-icon class="text-6xl" name="person-outline"></ion-icon>
+                    <img class="h-12 rounded-full" src="{{ asset('/assets/images/'. Auth::user()->photo) }}" alt="">
                 </div>
                 <div class="px-2">
                     <div>{{ Auth::user()->name }}</div>

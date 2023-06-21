@@ -22,8 +22,12 @@ export default {
                     100: '#1D9BE6',
                 },
                 tri: {
+                  100: '#C4E7FF',
+                },
+                qaud: {
                   100: '#F7F9F9',
                 },
+
             },
         },
     },
