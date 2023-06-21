@@ -11,7 +11,6 @@
             </form>
         </div>
 
-
         <div class="h-screen bg-green-100 m-2"></div>
     </div>
 
