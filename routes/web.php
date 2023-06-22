@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/home', [HomeController::class, 'tweetStore'])->name('tweet_store');
 });
 
 require __DIR__.'/auth.php';
