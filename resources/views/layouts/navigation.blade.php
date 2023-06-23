@@ -1,5 +1,5 @@
 {{-- Left Section --}}
-<div class="w-3/12 float-left sticky top-0">
+<div class="w-[27%] float-left sticky top-0">
 
     <div class="pl-5">
  
@@ -10,7 +10,7 @@
         </div>
         
         <div class="py-1">
-            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="{{ route('home') }}">
                 <ion-icon class="pr-3" name="home-outline"></ion-icon>
                 Home
             </a>
@@ -31,10 +31,11 @@
         </div>
 
         <div class="py-1">
-            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="#">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="{{ route('profile.index', ['username' => auth()->user()->username]) }}">
                 <ion-icon class="pr-3" name="person-outline"></ion-icon>
                 Profile
             </a>
+            
         </div>
 
         <div class="py-1 px-3">
@@ -134,10 +135,15 @@
             </div>
             <div>
                 <a class="inline-block bg-black rounded-full px-3 py-1 my-1 text-sm font-bold text-white" href="">Follow</a>
+                
             </div>
         </div>
         @endforeach
     </div>
+    {{-- @php
+                 $users = App\Models\User::find(Auth::id())->following;
+                @endphp
+                {{ $users }} --}}
     
 
     <div class="flex flex-wrap px-4 text-sm space-x-3 p-3">

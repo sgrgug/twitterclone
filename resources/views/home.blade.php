@@ -1,6 +1,6 @@
 <x-app-layout>
     
-    <div class="w-[45%] m-auto border-[1px]">
+    <div class="w-[46%] m-auto border-[1px]">
         <h1 class="font-bold text-xl p-4 sticky top-0 border-b-[1px] bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg z-10">{{ __('Home') }}</h1>
         <div class="border-b-[1px] p-4 grid grid-cols-12">
             <div class="col-span-1">
@@ -48,5 +48,6 @@
             retweet
         </div>
     </div>
+
 
 </x-app-layout>
