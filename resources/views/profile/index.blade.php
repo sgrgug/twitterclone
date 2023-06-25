@@ -29,13 +29,22 @@
                     <input class="hover:bg-zinc-200 duration-300 border-[1px] border-zinc-300 rounded-full float-right px-5 py-1 font-bold my-2 mx-10 cursor-pointer" type="submit" value="Edit Profile">
                 </form>
             @else
-                bye
+                bye<br />
+                @if ($check_follow_status)
+                    <form action="{{ route('profile.unfollow', $username) }}" method="post">  
+                        @csrf
+                        <input class="duration-300 border-[1px] border-zinc-300 rounded-full float-right px-5 py-1 font-bold my-2 mx-10 cursor-pointer hover:text-red-500 hover:bg-red-100 hover:border-red-500" onmouseover="this.value = 'Unfollow'" onmouseout="this.value = 'Following'" type="submit" value="Following">
+
+                    </form>
+                @else
+                    not
+                @endif
             @endif
 
         </div>
 
         @if (Auth::user()->username == $username)
-            <div class="px-2">
+            <div class="px-3">
                 <div class="font-bold text-xl">{{ Auth::user()->name }}</div>
                 <div class="flex items-center">
                     <div class="text-zinc-500">@</div>
@@ -49,8 +58,17 @@
                     @endif
                 </div>
             </div>
+            
+            <div class="flex items-center px-2 py-4 space-x-5">
+                <a class="hover:underline" href="{{ route('profile.following', Auth::user()->username) }}"><span class="font-bold">{{$user_followers->count()}}</span> <span class="text-zinc-500">Following</span></a>
+                <a class="hover:underline" href="{{ route('profile.followers', Auth::user()->username) }}"><span class="font-bold">{{$user_following->count()}}</span> <span class="text-zinc-500">Followers</span></a>
+                {{-- @foreach ($user_followers as $user_follower)
+                    {{ $user_follower->name }}
+                @endforeach --}}
+            </div>
+
         @else
-            <div class="px-2">
+            <div class="px-3">
                 <div class="font-bold text-xl">{{ $username_info->name }}</div>
                 <div class="flex items-center">
                     <div class="text-zinc-500">@</div>
@@ -63,6 +81,19 @@
                         </div>
                     @endif
                 </div>
+            </div>
+            
+            
+            <div class="flex items-center px-2 py-4 space-x-5">
+                <a class="hover:underline" href="{{ route('profile.following', $username) }}">
+                    <span class="font-bold">{{$visited_user_followers->count()}}</span> <span class="text-zinc-500">Following</span>
+                </a>
+                <a class="hover:underline" href="{{ route('profile.followers', $username) }}">
+                    <span class="font-bold">{{$visited_user_following->count()}}</span> <span class="text-zinc-500">Followers</span>
+                </a>
+                {{-- @foreach ($user_followers as $user_follower)
+                    {{ $user_follower->name }}
+                @endforeach --}}
             </div>
         @endif
     

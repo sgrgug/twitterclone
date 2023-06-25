@@ -25,10 +25,15 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/{username}', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/{username}/followers', [ProfileController::class, 'showFollowers'])->name('profile.followers');
+    Route::get('/profile/{username}/following', [ProfileController::class, 'showFollowing'])->name('profile.following');
+
+    Route::post('/profile/{username}/follow', [ProfileController::class, 'follow'])->name('profile.follow');
+    Route::post('/profile/{username}/unfollow', [ProfileController::class, 'unfollow'])->name('profile.unfollow');
+
     Route::get('/profile', function(){
         return redirect()->route('profile.index', ['username' => auth()->user()->username]);
     });
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 

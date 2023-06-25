@@ -10,7 +10,7 @@
         </div>
         
         <div class="py-1">
-            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="{{ route('home') }}">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5 {{ request()->routeIs('home') ? 'bg-qaud-100' : '' }} " href="{{ route('home') }}">
                 <ion-icon class="pr-3" name="home-outline"></ion-icon>
                 Home
             </a>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="py-1">
-            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="{{ route('profile.index', ['username' => auth()->user()->username]) }}">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5 {{ request()->routeIs('profile.index', auth()->user()->username) ? 'bg-qaud-100' : '' }}" href="{{ route('profile.index', ['username' => auth()->user()->username]) }}">
                 <ion-icon class="pr-3" name="person-outline"></ion-icon>
                 Profile
             </a>
@@ -107,7 +107,9 @@
 
         $random_ids = App\Models\User::pluck('id')->random(3);
 
-        $users = App\Models\User::whereIn('id', $random_ids)->get();
+        $users = App\Models\User::whereIn('id', $random_ids)
+                                    ->where('id', '!=', Auth::id())
+                                    ->get();
   
     @endphp
 
@@ -125,7 +127,7 @@
                         
 
                     <div class="font-bold text-md flex">
-                        <a class="hover:underline" href="#">{{ $user->name  }}</a>
+                        <a class="hover:underline" href="{{ route('profile.index', $user->username) }}">{{ $user->name  }}</a>
                         @if ($user->blue_tick == 0)
                             <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
                         @endif
