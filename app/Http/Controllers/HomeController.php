@@ -12,10 +12,25 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
+        $followingIds = auth()->user()->following()->pluck('users.id');
+
+        $tweets = Tweet::whereIn('user_id', $followingIds)->get();
+
+        //user details
+        // $tweet_user_details = Tweet::all(); // Retrieve all the tweets
+
+        // foreach ($tweet_user_details as $tweet) {
+        //     $user = $tweet->user; // Retrieve the associated user
+
+        //     // Now you can access the user details for each tweet
+        //     echo $user->name;
+        //     echo $user->email;
+        //     // ... and so on
+        // }
 
 
-
-        return view('home');
+        return view('home', compact('tweets'));
     }
 
     public function tweetStore(Request $request)

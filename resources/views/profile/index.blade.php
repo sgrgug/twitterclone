@@ -29,15 +29,16 @@
                     <input class="hover:bg-zinc-200 duration-300 border-[1px] border-zinc-300 rounded-full float-right px-5 py-1 font-bold my-2 mx-10 cursor-pointer" type="submit" value="Edit Profile">
                 </form>
             @else
-                bye<br />
                 @if ($check_follow_status)
                     <form action="{{ route('profile.unfollow', $username) }}" method="post">  
                         @csrf
                         <input class="duration-300 border-[1px] border-zinc-300 rounded-full float-right px-5 py-1 font-bold my-2 mx-10 cursor-pointer hover:text-red-500 hover:bg-red-100 hover:border-red-500" onmouseover="this.value = 'Unfollow'" onmouseout="this.value = 'Following'" type="submit" value="Following">
-
                     </form>
                 @else
-                    not
+                    <form action="{{ route('profile.follow', $username) }}" method="post">  
+                        @csrf
+                        <input class="bg-black text-white border-[1px] border-zinc-300 rounded-full float-right px-5 py-1 font-bold my-2 mx-10 cursor-pointer" type="submit" value="Follow">
+                    </form>
                 @endif
             @endif
 

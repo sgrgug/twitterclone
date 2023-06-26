@@ -126,7 +126,7 @@
 
                         
 
-                    <div class="font-bold text-md flex">
+                    <div class="font-bold text-md flex items-center">
                         <a class="hover:underline" href="{{ route('profile.index', $user->username) }}">{{ $user->name  }}</a>
                         @if ($user->blue_tick == 0)
                             <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>

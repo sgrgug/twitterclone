@@ -162,7 +162,8 @@ class ProfileController extends Controller
             $follower->following()->attach($following);
         }
 
-        return response()->json(['message' => 'Successfully followed.']);
+        
+        return redirect()->route('profile.index', $username);
     }
 
     public function unfollow(Request $request, $username)
@@ -176,7 +177,8 @@ class ProfileController extends Controller
             $follower->following()->detach($following);
         }
 
-        return response()->json(['message' => 'Successfully unfollowed.']);
+        
+        return redirect()->route('profile.index', $username);
     }
 
     
