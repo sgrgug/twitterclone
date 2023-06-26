@@ -2,31 +2,75 @@
     
     <div class="w-[46%] m-auto border-[1px]">
         
-        <div class="sticky top-0 z-10 bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg">
-            <h1 class="font-bold text-xl p-4">{{ __('Home') }}</h1>
-
-            {{-- <div class="flex items-center font-bold text-zinc-500">
-                <div class="py-4 hover:bg-qaud-100 duration-300 w-full text-center cursor-pointer {{ request()->routeIs('home'. "#foryou") ? 'border-b-4 border-pri-100' : '' }}">
-                    <a href="#foryou">For You</a>
-                </div>
-                <div class="py-4 hover:bg-qaud-100 duration-300 w-full text-center cursor-pointer {{ request()->routeIs('home'. "#following") ? 'border-b-4 border-pri-100' : '' }}">
-                    <a href="#following">Following</a>
-                </div>
-            </div> --}}
+        
+        <div class="flex items-center space-x-3 py-1 px-5 sticky top-0 z-10 bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg">
+            <a href="{{ url()->previous() }}"><ion-icon name="arrow-back-outline"></ion-icon></a>
+            <h1 class="font-bold text-xl p-4">{{ __('Tweet') }}</h1>
         </div>
 
+
+        <div class="grid grid-cols-12 hover:bg-zinc-100 cursor-pointer p-4">
+            <div class="col-span-1">
+                <img class="w-10 object-cover rounded-full" src="{{ asset('/assets/images/'. $tweet->user->photo) }}" alt="">
+            </div>
+            <div class="col-span-10">
+                <div class="flex items-center space-x-1">
+                    <a href="" class="font-bold hover:underline">{{ $tweet->user->name }}</a>
+                    @if ($tweet->user->blue_tick == 0)
+                        <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
+                    @endif
+                    <div class="text-zinc-600">
+                        {{ __('@') }}{{ $tweet->user->username }}
+                        {{ __('·') }}
+                        {{ $tweet->created_at->diffForHumans() }}
+                    </div>
+                </div>
+                <a href="{{ route('showtweet', $tweet->id) }}">
+                    <div class="mb-4">
+                        {{ $tweet->tweet }}
+                    </div>
+                </a>
+                <div class="flex justify-between text-md">
+                    <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                        <a class="flex items-center" href="#">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                            <span>23</span>
+                        </a>
+                    </div>
+                    <div class="p-2 hover:bg-green-100 hover:text-green-700 duration-300 rounded-full">
+                        <a href="#"><ion-icon name="git-compare-outline"></ion-icon></a>
+                    </div>
+                    <div class="p-2 hover:bg-red-100 hover:text-red-700 duration-300 rounded-full">
+                        <a href="#"><ion-icon name="heart-outline"></ion-icon></a>
+                    </div>
+                    <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                        <a href="#"><ion-icon name="stats-chart-outline"></ion-icon></a>
+                    </div>
+                    <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                        <a href="#"><ion-icon name="share-outline"></ion-icon></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-1">
+                <ion-icon class="hover:bg-blue-100 rounded-full p-3 duration-300" name="ellipsis-horizontal"></ion-icon>
+            </div>
+
+        </div>
+
+
+        {{-- tweet comment form --}}
         <div class="border-b-[1px] p-4 grid grid-cols-12">
             <div class="col-span-1">
                 <img class="h-12 rounded-full" src="{{ asset('/assets/images/'. Auth::user()->photo) }}" alt="">
             </div>
             <div class="px-3 col-span-11">
-                <form action="{{ route('tweet_store', ) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('store_tweet_comment', $tweet->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <span class="flex items-center w-fit hover:bg-tri-100 duration-200 ease-in text-pri-100 border-[1px] rounded-full px-3 cursor-pointer font-bold">Everyone<ion-icon class="pl-2" name="chevron-down-outline"></ion-icon></span>
-
-                    <textarea id="tweet-textarea" class="w-full resize-none border-0 focus:ring-transparent rounded-md p-2 overflow-hidden text-xl" rows="1" max="10" maxlength="100" placeholder="What is happening?!" name="tweet"></textarea>
                     
-                    <div class="px-3 flex items-center w-fit hover:bg-tri-100 duration-200 ease-in rounded-full cursor-pointer text-pri-100 font-bold"><ion-icon class="pr-2" name="globe-outline"></ion-icon>Everyone can reply</div>
+                    <span class="text-zinc-400">Replying to <a class="text-sec-100 font-bold" href="">{{ __('@') }}{{ $tweet->user->name }}</a></span>
+
+                    <textarea id="tweet-textarea" class="w-full resize-none border-0 focus:ring-transparent rounded-md p-2 overflow-hidden text-xl" rows="1" max="10" maxlength="100" placeholder="Tweet Your Reply!" name="tweet_comment"></textarea>
+                    
                     
                     <hr class="my-3">
 
@@ -41,63 +85,27 @@
                             <ion-icon class="text-xl p-2 hover:bg-tri-100 rounded-full duration-200 ease-in cursor-pointer text-pri-100 font-bold" name="location-outline"></ion-icon>
                         </div>
                         <div>
-                            <input class="rounded-full bg-pri-100 hover:bg-sec-100 px-4 py-2 cursor-pointer font-bold text-white" type="submit" value="Tweet">
+                            <input class="rounded-full bg-pri-100 hover:bg-sec-100 px-4 py-2 cursor-pointer font-bold text-white" type="submit" value="Replay">
                         </div>
                     </div>
 
                 </form>
             </div>
         </div>
+        {{-- tweet comment form --}}
 
-        {{-- <div class="h-screen bg-green-100 m-2">
-            id
-            post
-            location
-            photo
-            like
-            comment
-            view
-            share
-            retweet
-
-        </div> --}}
-        <div>
-            @foreach ($tweets as $tweet)
-
-            {{-- <a class="inline-block w-full" href="">
-                <div class="flex p-4 hover:bg-zinc-100 duration-200 ease-in-out">
-                    <div class="p-2">
-                        <img class="w-10 object-cover rounded-full" src="{{ asset('/assets/images/'. $tweet->user->photo) }}" alt="">
-                    </div>
-                    <div class="w-full">
-                        <div class="flex items-center space-x-1">
-                            <div class="font-bold">{{ $tweet->user->name }}</div>
-                            @if ($tweet->user->blue_tick == 0)
-                            <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
-                            @endif
-                            <div class="text-zinc-600">
-                                {{ __('@') }}{{ $tweet->user->username }}
-                                {{ __('·') }}
-                                {{ $tweet->created_at->diffForHumans() }}
-                            </div>
-                        </div>
-                        <div>
-                            {{ $tweet->tweet }}
-                        </div>
-                    </div>
-                    <div>
-                        <ion-icon class="hover:bg-blue-100 rounded-full p-3 duration-300" name="ellipsis-horizontal"></ion-icon>
-                    </div>
-                </div>
-            </a> --}}
+       
+        {{-- {{ $tweet->comment }} --}}
+        @foreach ($tweet->comment as $item)
+            {{-- {{$item->comment}} <br /><br/> --}}
             <div class="grid grid-cols-12 hover:bg-zinc-100 cursor-pointer p-4">
                 <div class="col-span-1">
-                    <img class="w-10 object-cover rounded-full" src="{{ asset('/assets/images/'. $tweet->user->photo) }}" alt="">
+                    <img class="w-10 object-cover rounded-full" src="{{ asset('/assets/images/'. $item->user->photo) }}" alt="">
                 </div>
                 <div class="col-span-10">
                     <div class="flex items-center space-x-1">
-                        <a href="{{ route('profile.index', $tweet->user->username) }}" class="font-bold hover:underline">{{ $tweet->user->name }}</a>
-                        @if ($tweet->user->blue_tick == 0)
+                        <a href="" class="font-bold hover:underline">{{ $item->user->name }}</a>
+                        @if ($item->user->blue_tick == 0)
                             <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
                         @endif
                         <div class="text-zinc-600">
@@ -108,14 +116,14 @@
                     </div>
                     <a href="{{ route('showtweet', $tweet->id) }}">
                         <div class="mb-4">
-                            {{ $tweet->tweet }}
+                            {{ $item->comment }}
                         </div>
                     </a>
                     <div class="flex justify-between text-md">
                         <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
                             <a class="flex items-center" href="#">
                                 <ion-icon name="chatbubble-outline"></ion-icon>
-                                <span>23</span>
+                                <span></span>
                             </a>
                         </div>
                         <div class="p-2 hover:bg-green-100 hover:text-green-700 duration-300 rounded-full">
@@ -135,11 +143,10 @@
                 <div class="col-span-1">
                     <ion-icon class="hover:bg-blue-100 rounded-full p-3 duration-300" name="ellipsis-horizontal"></ion-icon>
                 </div>
-
+    
             </div>
-            
-            @endforeach
-        </div>
+        @endforeach
+
     </div>
 
 

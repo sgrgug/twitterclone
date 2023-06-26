@@ -27,5 +27,7 @@ class DatabaseSeeder extends Seeder
             TweetSeeder::class,
         ]);
 
+        \App\Models\Comment::factory(100)->create();
+
     }
 }

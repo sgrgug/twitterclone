@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TweetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/home', [HomeController::class, 'tweetStore'])->name('tweet_store');
+
+    //show tweet
+    Route::get('/tweet/{id}', [TweetController::class, 'showTweet'])->name('showtweet');
+    Route::post('/tweet/{id}', [TweetController::class, 'storeTweetComment'])->name('store_tweet_comment');
 });
 
 require __DIR__.'/auth.php';
