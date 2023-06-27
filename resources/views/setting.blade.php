@@ -25,39 +25,42 @@
             <div class="w-[46%] m-auto border-[1px]">
                 <div class="flex items-center space-x-3 py-1 px-5 sticky top-0 z-10 bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg">
                     <a href="{{ url()->previous() }}"><ion-icon name="arrow-back-outline"></ion-icon></a>
-                    <h1 class="font-bold text-xl p-4">{{ __('Edit Profile') }}</h1>
+                    <h1 class="font-bold text-xl p-4">{{ __('Settings') }}</h1>
                 </div>
-               
-                <form class="" action="" method="post">
-                    @csrf
-                    @method('PUT')
-                    
-                    <div class="h-72">
-                        <div class="relative h-[75%] bg-slate-300">
-                            <img class="absolute -bottom-14 left-10 h-28 rounded-full" src="{{ asset('/assets/images/'. Auth::user()->photo) }}" alt="">
-                        </div>
-                    </div>
-
-                    <div class="px-5 py-2">
-                        <label for="">Name</label>
-                        <input class="w-full rounded-md focus:border-blue-300" type="text" value="{{ $user->name }}">
-                    </div>
-
-                    <div class="px-5 py-2">
-                        <label for="">Username</label>
-                        <input class="w-full rounded-md focus:border-blue-300" type="text" value="{{ $user->username }}">
-                    </div>
-
-                    <div class="px-5 py-2">
-                        <label for="">Email</label>
-                        <input class="w-full rounded-md focus:border-blue-300" type="text" value="{{ $user->email }}">
-                    </div>
-
-                    <input class="bg-black text-white px-5 py-1 rounded-md inline-block my-8 mx-4" type="submit" value="Save">
                 
-                </form>
                 
-                 
+                <div>
+                    <h1 class="px-4 font-bold">{{ __('Your Account >') }}</h1>
+                    <div class="px-16 py-2 hover:bg-qaud-100">
+                        <a href="{{ route('edit_profile') }}">
+                            <ion-icon class="pr-3" name="person-outline"></ion-icon>
+                            <span>{{ __('Change Account') }}</span>
+                        </a>
+                    </div>
+                    <div class="px-16 py-2 hover:bg-qaud-100">
+                        <a href="#">
+                            <ion-icon class="pr-3" name="key-outline"></ion-icon>
+                            <span>{{ __('Change Password') }}</span>
+                        </a>
+                    </div>
+                    <div class="px-16 py-2 hover:bg-qaud-100">
+                        <a href="#">
+                            <ion-icon class="pr-3" name="trash-outline"></ion-icon>
+                            <span>{{ __('Delete Account') }}</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h1 class="px-4 font-bold">{{ __('Twitter Blue >') }}</h1>
+                    <div class="px-16 py-2 hover:bg-qaud-100">
+                        <a href="#">
+                            <ion-icon class="pr-3" name="card-outline"></ion-icon>
+                            <span>{{ __('Purchase Blue') }}</span>
+                        </a>
+                    </div>
+                </div>
+                
             </div>
             
         </div>

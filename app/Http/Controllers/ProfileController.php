@@ -28,8 +28,12 @@ class ProfileController extends Controller
 
             
 
+            // User all Tweet
+            $tweets = Tweet::where('user_id', Auth::id())
+                            ->latest()
+                            ->get();
 
-            return view('profile.index', compact('username','auth_user_tweet_count', 'user_followers', 'user_following'));
+            return view('profile.index', compact('username','auth_user_tweet_count', 'user_followers', 'user_following', 'tweets'));
             
 
         } else {
@@ -59,8 +63,13 @@ class ProfileController extends Controller
 
                 $check_follow_status = $isFollowing ? true : false;
 
+                // User all Tweet
+                $tweets = Tweet::where('user_id', $profile_visited_user_id)
+                                ->latest()
+                                ->get();
 
-                return view('profile.index', compact('username','profile_visited_user_no_of_tweets','username_info', 'visited_user_followers', 'visited_user_following','check_follow_status'));
+
+                return view('profile.index', compact('username','profile_visited_user_no_of_tweets','username_info', 'visited_user_followers', 'visited_user_following','check_follow_status', 'tweets'));
 
             } else {
                 return "user not found!";

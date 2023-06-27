@@ -82,7 +82,13 @@
                             <img class="w-20 object-cover rounded-full" src="{{ asset('/assets/images/'. $user_follower->photo) }}" alt="">
                         </div>
                         <div class="w-full px-2 ">
-                            <div class="font-bold">{{ $user_follower->name }}</div>
+                            {{-- <div class="font-bold">{{ $user_follower->name }}</div> --}}
+                            <div class="font-bold text-md flex items-center">
+                                <a class="hover:underline" href="{{ route('profile.index', $user_follower->username) }}">{{ $user_follower->name }}</a>
+                                @if ($user_follower->blue_tick == 0)
+                                    <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
+                                @endif
+                            </div>
                             <div class="text-zinc-500">{{ __('@') }}{{ $user_follower->username }}</div>
                         </div>
                         <div>

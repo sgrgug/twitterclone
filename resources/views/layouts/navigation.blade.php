@@ -38,6 +38,14 @@
             
         </div>
 
+        <div class="py-1">
+            <a class="inline-block hover:bg-qaud-100 rounded-full text-2xl py-2 px-5" href="{{ route('setting') }}">
+                <ion-icon class="pr-3" name="settings-outline"></ion-icon>
+                Setting
+            </a>
+            
+        </div>
+
         <div class="py-1 px-3">
             <a class="inline-block bg-pri-100 hover:bg-sec-100 rounded-full text-xl text-white py-3 w-full text-center" href="#">
                 Tweet
@@ -108,8 +116,8 @@
         $random_ids = App\Models\User::pluck('id')->random(3);
 
         $users = App\Models\User::whereIn('id', $random_ids)
-                                    ->where('id', '!=', Auth::id())
-                                    ->get();
+                                ->where('id', '!=', Auth::id())
+                                ->get();
   
     @endphp
 

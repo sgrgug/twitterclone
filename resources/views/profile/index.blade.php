@@ -97,6 +97,122 @@
                 @endforeach --}}
             </div>
         @endif
+
+        {{-- Tweets --}}
+
+        @if (Auth::user()->username == $username)
+            <h1 class="font-bold px-16 py-5">Tweets</h1>
+            <div>
+                @foreach ($tweets as $tweet)
+                
+                <div class="grid grid-cols-12 hover:bg-zinc-100 cursor-pointer p-4">
+                    <div class="col-span-1">
+                        <img class="w-10 object-cover rounded-full" src="{{ asset('/assets/images/'. $tweet->user->photo) }}" alt="">
+                    </div>
+                    <div class="col-span-10">
+                        <div class="flex items-center space-x-1">
+                            <a href="{{ route('profile.index', $tweet->user->username) }}" class="font-bold hover:underline">{{ $tweet->user->name }}</a>
+                            @if ($tweet->user->blue_tick == 0)
+                                <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
+                            @endif
+                            <div class="text-zinc-600">
+                                {{ __('@') }}{{ $tweet->user->username }}
+                                {{ __('·') }}
+                                {{ $tweet->created_at->diffForHumans() }}
+                            </div>
+                        </div>
+                        <a href="{{ route('showtweet', $tweet->id) }}">
+                            <div class="mb-4">
+                                {{ $tweet->tweet }}
+                            </div>
+                        </a>
+                        <div class="flex justify-between text-md">
+                            <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                                <a class="flex items-center" href="#">
+                                    <ion-icon name="chatbubble-outline"></ion-icon>
+                                    <span>23</span>
+                                </a>
+                            </div>
+                            <div class="p-2 hover:bg-green-100 hover:text-green-700 duration-300 rounded-full">
+                                <a href="#"><ion-icon name="git-compare-outline"></ion-icon></a>
+                            </div>
+                            <div class="p-2 hover:bg-red-100 hover:text-red-700 duration-300 rounded-full">
+                                <a href="#"><ion-icon name="heart-outline"></ion-icon></a>
+                            </div>
+                            <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                                <a href="#"><ion-icon name="stats-chart-outline"></ion-icon></a>
+                            </div>
+                            <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                                <a href="#"><ion-icon name="share-outline"></ion-icon></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1">
+                        <ion-icon class="hover:bg-blue-100 rounded-full p-3 duration-300" name="ellipsis-horizontal"></ion-icon>
+                    </div>
+    
+                </div>
+                
+
+                @endforeach
+            </div>
+        @else 
+        <h1 class="font-bold px-16 py-5">Tweets</h1>
+        <div>
+            @foreach ($tweets as $tweet)
+            
+            <div class="grid grid-cols-12 hover:bg-zinc-100 cursor-pointer p-4">
+                <div class="col-span-1">
+                    <img class="w-10 object-cover rounded-full" src="{{ asset('/assets/images/'. $tweet->user->photo) }}" alt="">
+                </div>
+                <div class="col-span-10">
+                    <div class="flex items-center space-x-1">
+                        <a href="{{ route('profile.index', $tweet->user->username) }}" class="font-bold hover:underline">{{ $tweet->user->name }}</a>
+                        @if ($tweet->user->blue_tick == 0)
+                            <ion-icon class="text-white rounded-full font-bold bg-pri-100" name="checkmark-circle-outline"></ion-icon>
+                        @endif
+                        <div class="text-zinc-600">
+                            {{ __('@') }}{{ $tweet->user->username }}
+                            {{ __('·') }}
+                            {{ $tweet->created_at->diffForHumans() }}
+                        </div>
+                    </div>
+                    <a href="{{ route('showtweet', $tweet->id) }}">
+                        <div class="mb-4">
+                            {{ $tweet->tweet }}
+                        </div>
+                    </a>
+                    <div class="flex justify-between text-md">
+                        <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                            <a class="flex items-center" href="#">
+                                <ion-icon name="chatbubble-outline"></ion-icon>
+                                <span>23</span>
+                            </a>
+                        </div>
+                        <div class="p-2 hover:bg-green-100 hover:text-green-700 duration-300 rounded-full">
+                            <a href="#"><ion-icon name="git-compare-outline"></ion-icon></a>
+                        </div>
+                        <div class="p-2 hover:bg-red-100 hover:text-red-700 duration-300 rounded-full">
+                            <a href="#"><ion-icon name="heart-outline"></ion-icon></a>
+                        </div>
+                        <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                            <a href="#"><ion-icon name="stats-chart-outline"></ion-icon></a>
+                        </div>
+                        <div class="p-2 hover:bg-blue-100 hover:text-blue-700 duration-300 rounded-full">
+                            <a href="#"><ion-icon name="share-outline"></ion-icon></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <ion-icon class="hover:bg-blue-100 rounded-full p-3 duration-300" name="ellipsis-horizontal"></ion-icon>
+                </div>
+
+            </div>
+            
+
+            @endforeach
+        </div>
+        @endif
     
     </div>
 
