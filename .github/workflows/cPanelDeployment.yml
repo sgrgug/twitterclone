@@ -18,4 +18,4 @@ jobs:
         
       - name: Upload Files via FTP
         run: |
-          lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.USERNAME }},$ {{ secrets.PASSWORD }} ftp:ftp.wenepal.org; mirror -R ./local-directory ./remote-directory"
+          lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME }},$ {{ secrets.FTP_PASSWORD }} ftp://ftp.wenepal.org; mirror -R ./public ./public"
