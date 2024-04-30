@@ -1,19 +1,21 @@
-name: Publish Website to CPanel
+name: FTP Deployment
+
 on:
   push:
     branches:
-      - master
+      - main  # Change this to match your branch name
+
 jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
-      with:
-        ftp-server: ${{ secrets.SERVER }}
-        ftp-username: ${{ secrets.USERNAME }}
-        ftp-password: ${{ secrets.PASSWORD }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Install FTP Client
+        run: sudo apt-get install -y lftp
+        
+      - name: Upload Files via FTP
+        run: |
+          lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.USERNAME }},$ {{ secrets.PASSWORD }} ftp:ftp.wenepal.org; mirror -R ./local-directory ./remote-directory"
