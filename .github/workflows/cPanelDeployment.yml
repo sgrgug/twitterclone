@@ -3,7 +3,7 @@ name: FTP Deployment
 on:
   push:
     branches:
-      - main  # Change this to match your branch name
+      - master  # Change this to match your branch name
 
 jobs:
   deploy:
