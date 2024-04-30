@@ -16,6 +16,13 @@ jobs:
       - name: Install FTP Client
         run: sudo apt-get install -y lftp
         
-      - name: Upload Files via FTP
+      - name: Determine Changed Files
+        id: git_changes
         run: |
-          lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.USERNAME }},${{ secrets.PASSWORD }} ftp://ftp.wenepal.org; mirror --only-newer -R ./ ./"
+          git fetch --depth=1 origin $GITHUB_SHA
+          CHANGED_FILES=$(git diff --name-only $GITHUB_SHA^ $GITHUB_SHA)
+          echo "::set-output name=files::$CHANGED_FILES"
+          
+      - name: Upload Changed Files via FTP
+        run: |
+          lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.USERNAME }},${{ secrets.PASSWORD }} ftp://ftp.wenepal.org; mirror --reverse --include-glob '${{ steps.git_changes.outputs.files }}' -R ./ ./"
