@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'sgrgug@gmail.com',
             'password' => Hash::make('1'),
         ]);
+        
 
         $this->call([
             UserSeeder::class,
