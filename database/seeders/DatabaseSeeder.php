@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Sagar Gurung',
             'username' => 'sgrgug',
             'email' => 'sgrgug@gmail.com',
-            'password' => Hash::make('123456789'),
+            'password' => Hash::make('1'),
         ]);
 
         $this->call([
