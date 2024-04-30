@@ -24,5 +24,6 @@ jobs:
           echo "::set-output name=files::$CHANGED_FILES"
           
       - name: Upload Changed Files via FTP
+        if: steps.git_changes.outputs.files != ''
         run: |
           lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.USERNAME }},${{ secrets.PASSWORD }} ftp://ftp.wenepal.org; mirror --reverse --include-glob '${{ steps.git_changes.outputs.files }}' -R ./ ./"
